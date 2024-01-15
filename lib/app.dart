@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/routes.dart';
 import 'package:todo_app/features/onboarding/onboarding_page.dart';
+import 'package:todo_app/features/register/register_page.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -16,6 +17,7 @@ class _AppState extends State<App> {
       initialRoute: NamedRoute.onboarding, 
       routes: {
         NamedRoute.onboarding:(context) => const OnboardingPage(),
+        NamedRoute.register:(context) => const RegisterPage(),
       },
     );
   }

@@ -1,64 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/colors.dart';
+import 'package:todo_app/constants/routes.dart';
+import 'package:todo_app/constants/text_styles.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
+  @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          RichText(
-            text: const TextSpan(
-              text: 'todo ',
-              style: TextStyle(
-                fontSize: 34,
-                fontFamily: 'JejuGothic',
-                color: AppColors.black,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'gives you focus, from work to play.',
-                  style: TextStyle(color: AppColors.lightBlue, fontSize: 34),
-                )
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset('assets/images/green_vector_background.png'),
+            ],
           ),
-          Image.asset('assets/images/onboarding_image.png'),
-          TextButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(AppColors.lightBlue),
-            ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.05, vertical: screenHeight * 0.05),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: screenWidth * 0.5,
-                  height: screenHeight * 0.07,
-                  child: const Text(
-                    'register',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 24,
-                      fontFamily: 'Inter',
-                    ),
+                RichText(
+                  text: TextSpan(
+                    text: 'todo ',
+                    style:
+                        AppTextStyles.big34w600.apply(color: AppColors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'gives you focus, from work to play.',
+                        style: AppTextStyles.big34w600
+                            .apply(color: AppColors.lightBlue),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'already have an account?',
-              children: <TextSpan>[
-                TextSpan(text: 'login'),
+                Image.asset('assets/images/onboarding_image.png'),
+                Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          NamedRoute.register,
+                        );
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            AppColors.lightBlue),
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: screenWidth * 0.65,
+                        height: screenHeight * 0.07,
+                        child: const Text(
+                          'register',
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 24,
+                            fontFamily: 'Inter',
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.01,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'already have an account? ',
+                        style: AppTextStyles.small14w400
+                            .apply(color: AppColors.black70),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'login',
+                            style: AppTextStyles.small14w600
+                                .apply(color: AppColors.black70),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

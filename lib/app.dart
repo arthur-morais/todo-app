@@ -17,7 +17,7 @@ class _AppState extends State<App> {
       initialRoute: NamedRoute.onboarding, 
       routes: {
         NamedRoute.onboarding:(context) => const OnboardingPage(),
-        NamedRoute.register:(context) => const RegisterPage(),
+        NamedRoute.register:(context) => RegisterPage(),
       },
     );
   }

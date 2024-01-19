@@ -3,6 +3,8 @@ import 'package:todo_app/constants/colors.dart';
 import 'package:todo_app/constants/routes.dart';
 import 'package:todo_app/constants/text_styles.dart';
 
+import '../../constants/widgets/custom_button.dart';
+
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -17,85 +19,78 @@ class _OnboardingPageState extends State<OnboardingPage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Image.asset('assets/images/green_vector_background.png'),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.05, vertical: screenHeight * 0.05),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'todo ',
-                    style:
-                        AppTextStyles.big34w600.apply(color: AppColors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'gives you focus, from work to play.',
-                        style: AppTextStyles.big34w600
-                            .apply(color: AppColors.lightBlue),
-                      ),
-                    ],
-                  ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset('assets/images/green_vector_background.png'),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.05,
+                  vertical: screenHeight * 0.05,
                 ),
-                Image.asset('assets/images/onboarding_image.png'),
-                Column(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          NamedRoute.register,
-                        );
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            AppColors.lightBlue),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: screenWidth * 0.65,
-                        height: screenHeight * 0.07,
-                        child: const Text(
-                          'register',
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 24,
-                            fontFamily: 'Inter',
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.01,
-                    ),
                     RichText(
                       text: TextSpan(
-                        text: 'already have an account? ',
-                        style: AppTextStyles.small14w400
-                            .apply(color: AppColors.black70),
+                        text: 'todo ',
+                        style: AppTextStyles.big34w600
+                            .apply(color: AppColors.black),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'login',
-                            style: AppTextStyles.small14w600
-                                .apply(color: AppColors.black70),
+                            text: 'gives you focus, from work to play.',
+                            style: AppTextStyles.big34w600
+                                .apply(color: AppColors.lightBlue),
                           ),
                         ],
                       ),
                     ),
+                    Image.asset('assets/images/onboarding_image.png'),
+                    Column(
+                      children: [
+                        CustomButton(
+                          buttonText: 'register',
+                          buttonWidth: screenWidth * 0.65,
+                          buttonHeight: screenHeight * 0.07,
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              NamedRoute.register,
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'already have an account? ',
+                            style: AppTextStyles.small14w400
+                                .apply(color: AppColors.black70),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'login',
+                                style: AppTextStyles.small14w600
+                                    .apply(color: AppColors.black70),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

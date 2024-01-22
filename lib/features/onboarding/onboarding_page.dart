@@ -57,6 +57,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       children: [
                         CustomButton(
                           buttonText: 'register',
+                          isText: true,
                           buttonWidth: screenWidth * 0.65,
                           buttonHeight: screenHeight * 0.07,
                           onPressed: () {

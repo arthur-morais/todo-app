@@ -7,17 +7,27 @@ class CustomButton extends StatefulWidget {
   const CustomButton({
     super.key,
     this.onPressed,
-    required this.buttonText,
+    this.buttonText,
     required this.buttonWidth,
     required this.buttonHeight,
     this.textStyle,
+    this.buttonColor,
+    this.buttonBorderColor,
+    this.buttonTextColor,
+    this.buttonImage,
+    required this.isText,
   });
 
   final void Function()? onPressed;
-  final String buttonText;
+  final String? buttonText;
   final double buttonWidth;
   final double buttonHeight;
   final TextStyle? textStyle;
+  final String? buttonImage;
+  final Color? buttonColor;
+  final Color? buttonBorderColor;
+  final Color? buttonTextColor;
+  final bool isText;
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -34,43 +44,28 @@ class _CustomButtonState extends State<CustomButton> {
         width: widget.buttonWidth,
         height: widget.buttonHeight,
         decoration: BoxDecoration(
-          color: AppColors.lightBlue,
-          borderRadius: _buttonBorderRadius,
-        ),
+            color: widget.buttonColor ?? AppColors.lightBlue,
+            borderRadius: _buttonBorderRadius,
+            border: Border.all(
+                color: widget.buttonBorderColor ?? AppColors.darkBlue)),
         child: InkWell(
           borderRadius: _buttonBorderRadius,
           onTap: widget.onPressed,
           child: Align(
-            child: Text(
-              widget.buttonText,
-              textAlign: TextAlign.center,
-              style: widget.textStyle ??
-                  AppTextStyles.medium20w400.apply(color: AppColors.white),
-            ),
-          ),
+              child: widget.isText
+                  ? Text(
+                      widget.buttonText ?? 'texto',
+                      textAlign: TextAlign.center,
+                      style: widget.textStyle ??
+                          AppTextStyles.medium20w400.apply(
+                            color: widget.buttonTextColor ?? AppColors.white,
+                          ),
+                    )
+                  : Image.asset(
+                      widget.buttonImage ?? '',
+                    )),
         ),
       ),
     );
-
-    // return TextButton(
-    //   onPressed: () {},
-    //   style: ButtonStyle(
-    //     backgroundColor: MaterialStateProperty.all<Color>(AppColors.lightBlue),
-    //   ),
-    //   child: Container(
-    //     alignment: Alignment.center,
-    //     decoration: BoxDecoration(
-    //       borderRadius:,
-    //     ),
-    //     child: Text(
-    //       widget.buttonText,
-    //       style: const TextStyle(
-    //         color: AppColors.white,
-    //         fontSize: 24,
-    //         fontFamily: 'Inter',
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
